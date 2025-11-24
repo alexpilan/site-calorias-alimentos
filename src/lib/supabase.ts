@@ -12,27 +12,9 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
     persistSession: true,
     autoRefreshToken: true,
-    detectSessionInUrl: true,
-    flowType: 'pkce',
-  },
-  global: {
-    headers: {
-      'x-application-name': 'nutriapp',
-    },
   },
 })
 
-// Helper para verificar conexão
-export const checkConnection = async () => {
-  try {
-    const { error } = await supabase.from('modulos').select('count').limit(1)
-    return !error
-  } catch {
-    return false
-  }
-}
-
-// Types
 export type Profile = {
   id: string
   nome: string | null
@@ -48,13 +30,6 @@ export type Modulo = {
   imagem: string | null
   created_at: string
   updated_at: string
-}
-
-export type Message = {
-  id: number
-  content: string
-  user: string
-  created_at: string
 }
 
 export type Imagem = {
